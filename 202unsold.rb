@@ -18,7 +18,7 @@ end
 
 def printDash()
 	i = 0
-	while i < 55
+	while i < 60
 		print "-"
 		i += 1
 	end
@@ -28,10 +28,6 @@ end
 
 def calculUnsold(a, b, x, y)
 	return ((a - x)*(b - y))/((5*a - 150)*(5*b - 150))
-end
-
-def printXline()
-	puts "\tX=10\tX=20\tX=30\tX=40\tX=50\tY law"
 end
 
 def displayZvalue()
@@ -53,7 +49,7 @@ end
 
 def displayTable(table)
 	printDash()
-	printXline()
+	puts "\tX=10\tX=20\tX=30\tX=40\tX=50\tY law"
 	y = 1
 	for arr in table
 		x = 1
@@ -112,7 +108,7 @@ def main()
 	print_help()
 	if ARGV.length != 2
 		puts "Error: bad number of arguments"
-		exit(0)
+		exit(84)
 	end
 	a = is_numeric(ARGV[0]) ? Float(ARGV[0]) : nil
 	b = is_numeric(ARGV[1]) ? Float(ARGV[1]) : nil
