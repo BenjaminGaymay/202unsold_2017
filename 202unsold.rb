@@ -53,7 +53,11 @@ def displayTable(table)
 	y = 1
 	for arr in table
 		x = 1
-		print "Y=#{y}\t"
+		if y == table.length
+			print "X law\t"
+		else
+			print "Y=#{y*10}\t"
+		end
 		for el in arr
 			if x == arr.length and y == table.length
 				print "1"
