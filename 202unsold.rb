@@ -1,9 +1,19 @@
 #!/usr/bin/env ruby
 
+def is_numeric(o)
+	true if Integer(o) rescue false
+end
+
 def print_help()
-	puts "USAGE\n\t./202unsold a b\n\nDESCRIPTION\n\ta\tconstant computed from the past results"
-	puts "\tb\tconstant computed from the past results"
-	exit()
+	if ARGV.length == 0
+		exit(84)
+	end
+	if ARGV[0] == "-h"
+		puts "USAGE\n\t./202unsold a b\n\nDESCRIPTION"
+		puts "\ta\tconstant computed from the past results"
+		puts "\tb\tconstant computed from the past results"
+		exit()
+	end
 end
 
 def printDash()
@@ -41,44 +51,75 @@ def displayZvalue()
 	printDash()
 end
 
-def myUnsold(a, b)
-	
+def displayTable(table)
 	printDash()
 	printXline()
-
-	arr = Array.new(5, 0)
-	y = 10
-	law_y = 0
-	while y <= 50
-		law_x = 0
-		x = 10
+	y = 1
+	for arr in table
+		x = 1
 		print "Y=#{y}\t"
-		while x <= 50
-			print "%.3f\t" % calculUnsold(a, b, x, y)
-			law_x += calculUnsold(a, b, x, y)
-			arr[x/10-1] += calculUnsold(a,b,x,y)
-			x+=10
+		for el in arr
+			if x == arr.length and y == table.length
+				print "1"
+			else
+				print "%.3f\t" % el
+			end
+			x += 1
 		end
-		print "%.3f\n" % law_x
-		y+=10
+		puts
+		y+= 1
 	end
-	y=0
-	print "X law\t"
+	printDash()
+end
+
+def getLawY(table)
+	x = 0
+	while x < table.length
+		y = 0
+		res = 0.0
+		while y < table[x].length
+			res += table[y][x]
+			y += 1
+		end
+		table[y-1][x] = res
+		x += 1
+	end
+	return table
+end
+
+def myUnsold(a, b)
+	
+	table = Array.new(6) {Array.new(6, 0)}
+	y = 0
 	while y < 5
-		print "%.3f\t" % arr[y]
+		law_x = 0
+		x = 0
+		while x < 5
+			val = calculUnsold(a, b, (x+1)*10, (y+1)*10)
+			law_x += val
+			table[y][x] = val
+			x+=1
+		end
+		table[y][x] = law_x
 		y+=1
 	end
-	puts "1"
-	printDash()
-	displayZvalue()
+	y=0
+	table = getLawY(table)
+	displayTable(table)
 end
 
 def main()
-	if ARGV[0] == "-h"
-		print_help()
+	print_help()
+	if ARGV.length != 2
+		puts "Error: bad number of arguments"
+		exit(0)
 	end
-	a = Float(ARGV[0])
-	b = Float(ARGV[1])
+	a = is_numeric(ARGV[0]) ? Float(ARGV[0]) : nil
+	b = is_numeric(ARGV[1]) ? Float(ARGV[1]) : nil
+	if a == nil or b == nil
+		puts "Error: arguments must be valid number"
+		exit(84)
+	end
 	if (a <= 50 or b <= 50)
 		puts "Error: a and b must be greater than 50"
 		exit(84)
