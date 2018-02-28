@@ -6,6 +6,7 @@ end
 
 def print_help()
 	if ARGV.length == 0
+		puts "Error: bad number of arguments"
 		exit(84)
 	end
 	if ARGV[0] == "-h"
