@@ -27,33 +27,6 @@ def printDash()
 	print "\n"
 end
 
-# def mdr(table)
-# 	x_variance = 0
-# 	mdr = 0
-# 	ptdr = 0
-# 	y_variance = 0
-# 	z_variance = 0
-# 	for i in range(5):
-# 	    x_variance += ((i + 1) * 10) * array[5][i]
-# 	    y_variance += ((i + 1) * 10) * array[i][5]
-# 	for i in range(9):
-# 	    z_variance += ((i + 2) * 10) * array[6][i]
-# 	a = 0
-# 	b = 0
-# 	c = 0
-# 	for i in range(5):
-# 	    a += array[5][i]
-# 	    b += array[i][5]
-# 	for i in range(9):
-# 	    c += array[6][i]
-# 	for i in range(5):
-# 	    mdr += (array[5][i]) * ((((i + 1) * 10) - (x_variance / a)) ** 2)
-# 	    ptdr += (array[i][5]) * ((((i + 1) * 10) - (y_variance / b)) ** 2)
-# 	azer = 0
-# 	for i in range(9):
-# 	    azer += (array[6][i]) * ((((i + 2) * 10) - (z_variance / c)) ** 2)
-# end
-
 def calculUnsold(a, b, x, y)
 	return ((a - x)*(b - y))/((5*a - 150)*(5*b - 150))
 end
